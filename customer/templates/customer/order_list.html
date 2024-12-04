@@ -1,0 +1,43 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <h2>Orders for {{ customer.name }}</h2>
+        <nav>
+            <a href="{% url 'order_form' customer.id %}">Add Order</a>
+            <a href="{% url 'customer_list' %}">Back to Customers</a>
+        </nav>
+    </header>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Order Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.product }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.order_status }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>
+                <a class="btn update-btn" href="{% url 'edit_order' order.id %}">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No orders found.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</div>

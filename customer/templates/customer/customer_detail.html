@@ -1,0 +1,27 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <h2>Customer Details</h2>
+        <nav>
+            <a href="{% url 'order_list' customer.id %}">View Orders</a>
+            <a href="{% url 'order_form' customer.id %}">Add Orders</a>
+            <a href="{% url 'customer_list' %}">Back to Customers</a>
+        </nav>
+    </header>
+
+    <p><strong>Name:</strong> {{ customer.name }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <p><strong>Phone:</strong> {{ customer.phone }}</p>
+    <p><strong>Address:</strong> {{ customer.address }}</p>
+
+    <h3>Orders</h3>
+    <ul>
+        {% for order in customer.orders.all %}
+        <li>{{ order.product }} - {{ order.quantity }} - {{ order.price }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endblock %}
+</div>

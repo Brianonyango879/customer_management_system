@@ -1,0 +1,84 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <h1 style="color: white"></h1>
+        <nav>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'customer_list' %}">Customers List</a>
+            <a href="{%  url 'logout'  %}">Log Out</a>
+        </nav>
+    </header>
+
+    <!-- Dashboard Statistics -->
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h3>Total Orders</h3>
+            <p>{{ total_orders }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Orders Delivered</h3>
+            <p>{{ orders_completed}}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Orders Pending</h3>
+            <p>{{ orders_pending }}</p>
+        </div>
+    </div>
+
+    <!-- Customers and Orders Section -->
+    <div class="dashboard-content">
+        <!-- Customers List -->
+        <div class="customers-section">
+            <h3>CUSTOMERS: {{ customer_count }}</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Orders</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.orders.count }}</td>
+                    <td><a href="{% url 'customer_detail' customer.id %}" class="view-btn">View</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+     <div class="dashboard-content">
+        <!--  Orders -->
+        <div class="orders-section">
+            <h3>ORDERS: {{ orders.count }}</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.product }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>{{ order.order_status }}</td>
+                    <td><a href="{% url 'edit_order' order.id %}" class="update-btn">Update</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
