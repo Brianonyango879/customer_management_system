@@ -9,6 +9,11 @@
             <a href="{% url 'dashboard' %}">Dashboard</a>
         </nav>
     </header>
+    <form method="get" action="{% url 'customer_list' %}" class="search-form">
+        <input type="text" name="q" placeholder="Search customers" value="{{ query }}" class="search-input">
+        <button type="submit" class="search-button" style="background-color: deepskyblue">Search</button>
+    </form>
+    <br>
     <table class="table">
         <thead>
         <tr>
@@ -35,5 +40,23 @@
         {% endfor %}
         </tbody>
     </table>
+    <!-- Pagination Controls -->
+<div class="pagination">
+    <span class="step-links">
+        {% if customers.has_previous %}
+        <a href="?page=1" class="btn btn-primary">First</a>
+        <a href="?page={{ customers.previous_page_number }}" class="btn btn-primary">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ customers.number }} of {{ customers.paginator.num_pages }}
+        </span>
+
+        {% if customers.has_next %}
+        <a href="?page={{ customers.next_page_number }}" class="btn btn-primary">Next</a>
+        <a href="?page={{ customers.paginator.num_pages }}" class="btn btn-primary">Last</a>
+        {% endif %}
+    </span>
+</div>
     {% endblock %}
 </div>

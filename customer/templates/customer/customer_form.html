@@ -9,19 +9,27 @@
         </nav>
     </header>
 
-    <form method="POST">
+    <form method="POST" class="p-4 bg-light rounded shadow-sm">
         {% csrf_token %}
+        <div class="form-group mb-3">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="{{ customer.name|default:'' }}" required><br>
+        </div>
 
+        <div class="form-group mb-3">
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" value="{{ customer.email|default:'' }}" required><br>
+        </div>
 
+        <div class="form-group mb-3">
         <label for="phone">Phone:</label>
         <input type="text" name="phone" id="phone" value="{{ customer.phone|default:'' }}" required><br>
+        </div>
 
+        <div class="form-group mb-3">
         <label for="address">Address:</label>
         <textarea name="address" id="address" required>{{ customer.address|default:'' }}</textarea><br>
+         </div>
 
         <button class="btn btn-success" type="submit">Save</button>
     </form>

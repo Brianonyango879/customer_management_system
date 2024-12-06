@@ -1,11 +1,36 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Customer, Order
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q  # Import Q for complex queries
+
 
 # Create your views here.
 @login_required(login_url='login')
 def customer_list(request):
+    query = request.GET.get('q')
     customers = Customer.objects.all()
+
+    if query:
+        # Filter customers based on the search query
+        customers = customers.filter(
+            Q(name__icontains=query) |  # Search by name (case-insensitive)
+            Q(email__icontains=query) |  # Search by email
+            Q(phone__icontains=query)  # Search by phone number
+        )
+
+    # Set up pagination (10 customers per page)
+    paginator = Paginator(customers, 10)
+    page = request.GET.get('page')  # Get the current page number from the request
+
+    try:
+        customers = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, show the first page
+        customers = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, show the last page of results
+        customers = paginator.page(paginator.num_pages)
     return render(request, 'customer/customer_list.html', {'customers' : customers})
 @login_required(login_url='login')
 def customer_detail(request, id):
@@ -70,21 +95,28 @@ def edit_order(request, order_id):
 @login_required(login_url='login')
 def dashboard(request):
     # Query all customers and orders
-    customers = Customer.objects.all()
     total_orders = Order.objects.count()
     orders_completed = Order.objects.filter(order_status="Completed").count()
     orders_pending = Order.objects.filter(order_status="Pending").count()
+    orders = Order.objects.all()
 
-    # Slice only AFTER filtering/sorting
-    recent_orders = Order.objects.all().order_by('-id')[:5]  # Last 5 orders
+    # Set up pagination (5 orders per page)
+    paginator = Paginator(orders, 5)
+    page = request.GET.get('page')  # Get the current page number from the request
 
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, show the first page
+        orders = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, show the last page of results
+        orders = paginator.page(paginator.num_pages)
     # Pass the context to the template
     context = {
         'total_orders': total_orders,
         'orders_completed': orders_completed,
         'orders_pending': orders_pending,
-        'customer_count': customers.count(),
-        'customers': customers,
-        'orders': recent_orders,
+        'orders': orders,
     }
     return render(request, 'customer/dashboard.html', context)

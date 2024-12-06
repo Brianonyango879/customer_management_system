@@ -28,43 +28,17 @@
             <p>{{ orders_pending }}</p>
         </div>
     </div>
-
-    <!-- Customers and Orders Section -->
-    <div class="dashboard-content">
-        <!-- Customers List -->
-        <div class="customers-section">
-            <h3>CUSTOMERS: {{ customer_count }}</h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Orders</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for customer in customers %}
-                <tr>
-                    <td>{{ customer.name }}</td>
-                    <td>{{ customer.orders.count }}</td>
-                    <td><a href="{% url 'customer_detail' customer.id %}" class="view-btn">View</a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
      <div class="dashboard-content">
         <!--  Orders -->
         <div class="orders-section">
-            <h3>ORDERS: {{ orders.count }}</h3>
+            <h3><strong>ORDERS</strong></h3>
             <table class="table">
                 <thead>
                 <tr>
                     <th>Product</th>
                     <th>Date Ordered</th>
                     <th>Status</th>
-                    <th>Update</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,11 +47,29 @@
                     <td>{{ order.product }}</td>
                     <td>{{ order.order_date }}</td>
                     <td>{{ order.order_status }}</td>
-                    <td><a href="{% url 'edit_order' order.id %}" class="update-btn">Update</a></td>
+                    <td><a href="{% url 'order_list' order.id %}" class="view-btn">View</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            <!-- Pagination Controls -->
+<div class="pagination">
+    <span class="step-links">
+        {% if orders.has_previous %}
+        <a href="?page=1" class="btn btn-primary">First</a>
+        <a href="?page={{ orders.previous_page_number }}" class="btn btn-primary">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ orders.number }} of {{ orders.paginator.num_pages }}
+        </span>
+
+        {% if orders.has_next %}
+        <a href="?page={{ orders.next_page_number }}" class="btn btn-primary">Next</a>
+        <a href="?page={{ orders.paginator.num_pages }}" class="btn btn-primary">Last</a>
+        {% endif %}
+    </span>
+</div>
         </div>
     </div>
 </div>
