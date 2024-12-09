@@ -95,6 +95,7 @@ def edit_order(request, order_id):
 @login_required(login_url='login')
 def dashboard(request):
     # Query all customers and orders
+    customers = Customer.objects.all()
     total_orders = Order.objects.count()
     orders_completed = Order.objects.filter(order_status="Completed").count()
     orders_pending = Order.objects.filter(order_status="Pending").count()
@@ -117,6 +118,7 @@ def dashboard(request):
         'total_orders': total_orders,
         'orders_completed': orders_completed,
         'orders_pending': orders_pending,
+        'customers': customers,
         'orders': orders,
     }
     return render(request, 'customer/dashboard.html', context)
