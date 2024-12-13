@@ -1,0 +1,196 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: darkgray;
+    color: black;
+    overflow-x: auto;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 24px;
+    color: white;
+}
+
+.dashboard-header nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.dashboard-header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+.stat-card{
+    background: darkgreen;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.stat-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    display: flex;
+    gap: 20px;
+}
+
+.customers-section,
+.orders-section {
+    flex: 1;
+}
+
+.customers-section h3,
+.orders-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: deepskyblue;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid white;
+}
+
+.table th {
+    background: deepskyblue;
+    color: white;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Button Styles */
+.view-btn,
+.update-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background: maroon;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.update-btn:hover,
+.view-btn:hover {
+    background: maroon;
+    cursor: pointer;
+}
+
+/* Highlight Buttons */
+.update-btn {
+    background-color: orange;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: orange;
+}
+
+.cancel-btn {
+    background-color: red;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: red;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+        'nd nd nd nd nd nd nd nd'
+        'cd cd cd cd cd cd cd cd'
+        'fd fd fd fd fd fd fd fd';
+}
+
+#NavbarDiv {
+    grid-area: nd;
+}
+
+#ContentDiv {
+    grid-area: cd;
+}
+
+#FooterDiv {
+    grid-area: fd;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .dashboard-container {
+        align-items: center;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas:
+        'nd nd nd nd nd nd nd nd'
+        'cd cd cd cd cd cd cd cd'
+        'fd fd fd fd fd fd fd fd';
+    }
+}

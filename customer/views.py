@@ -99,6 +99,7 @@ def dashboard(request):
     total_orders = Order.objects.count()
     orders_completed = Order.objects.filter(order_status="Completed").count()
     orders_pending = Order.objects.filter(order_status="Pending").count()
+    orders_processing = Order.objects.filter(order_status="Processing").count()
     orders = Order.objects.all()
 
     # Set up pagination (5 orders per page)
@@ -118,6 +119,7 @@ def dashboard(request):
         'total_orders': total_orders,
         'orders_completed': orders_completed,
         'orders_pending': orders_pending,
+        'orders_processing': orders_processing,
         'customers': customers,
         'orders': orders,
     }
