@@ -23,7 +23,7 @@
             <h3>Orders Delivered</h3>
             <p>{{ orders_completed}}</p>
         </div>
-         <div class="stat-card">
+        <div class="stat-card">
             <h3>Orders Processing</h3>
             <p>{{ orders_processing}}</p>
         </div>
@@ -32,7 +32,7 @@
             <p>{{ orders_pending }}</p>
         </div>
     </div>
-     <div class="dashboard-content">
+    <div class="dashboard-content">
         <!--  Orders -->
         <div class="orders-section">
             <h3><strong>ORDERS</strong></h3>
@@ -55,23 +55,49 @@
                 </tbody>
             </table>
             <!-- Pagination Controls -->
-<div class="pagination">
+            <div class="pagination">
     <span class="step-links">
+        <ul class="pagination justify-content-center">
         {% if orders.has_previous %}
-        <a href="?page=1" class="btn btn-primary">First</a>
-        <a href="?page={{ orders.previous_page_number }}" class="btn btn-primary">Previous</a>
+        <!--        <a href="?page=1" class="btn btn-primary">First</a>-->
+        <!--        <a href="?page={{ orders.previous_page_number }}" class="btn btn-primary">Previous</a>-->
+        <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="First">
+                &#171; <!-- Double arrow for 'First' -->
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ orders.previous_page_number }}" aria-label="Previous">
+                &#8249; <!-- Single arrow for 'Previous' -->
+            </a>
+        </li>
         {% endif %}
 
-        <span class="current">
-            Page {{ orders.number }} of {{ orders.paginator.num_pages }}
-        </span>
+<!--        <span class="current">-->
+<!--            Page {{ orders.number }} of {{ orders.paginator.num_pages }}-->
+<!--        </span>-->
+        <!-- Current Page Info -->
+        <li class="page-item disabled">
+            <span class="page-link">Page {{ orders.number }} of {{ orders.paginator.num_pages }}</span>
+        </li>
 
         {% if orders.has_next %}
-        <a href="?page={{ orders.next_page_number }}" class="btn btn-primary">Next</a>
-        <a href="?page={{ orders.paginator.num_pages }}" class="btn btn-primary">Last</a>
+<!--        <a href="?page={{ orders.next_page_number }}" class="btn btn-primary">Next</a>-->
+<!--        <a href="?page={{ orders.paginator.num_pages }}" class="btn btn-primary">Last</a>-->
+         <li class="page-item">
+            <a class="page-link" href="?page={{ orders.next_page_number }}" aria-label="Next">
+                &#8250; <!-- Single arrow for 'Next' -->
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ orders.paginator.num_pages }}" aria-label="Last">
+                &#187; <!-- Double arrow for 'Last' -->
+            </a>
+        </li>
         {% endif %}
+        </ul>
     </span>
-</div>
+            </div>
         </div>
     </div>
 </div>
