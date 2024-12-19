@@ -17,6 +17,7 @@
             height: 100%;
             background: darkgray !important;
         }
+
         .dashboard-container {
             max-width: 1000px;
             margin: 20px auto;
@@ -24,7 +25,8 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        }
+
         .user_card {
             width: 350px;
             margin-top: auto;
@@ -98,23 +100,90 @@
             padding: 1rem;
             text-align: center;
         }
+
+        /* Slideshow container */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Slides */
+        .slides {
+            display: none;
+            width: 100%;
+        }
+
+        /* Fade animation */
+        .fade {
+            animation: fade 2s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0.4;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Navigation buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            user-select: none;
+        }
+
+        /* Positioning buttons */
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        /* Hover effect for buttons */
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     </style>
 
 </head>
 <body>
 <div id="NavbarDiv">
     <header class="d-flex justify-content-center">
-            <img src="{% static 'assets/customer.png' %}" alt="Logo" class="img-fluid"
-                 style="max-height: 50px;border-radius: 10px;">
-            <h1 style="font-family: Algerian;">Customer Management System</h1>
+        <img src="{% static 'assets/customer.png' %}" alt="Logo" class="img-fluid"
+             style="max-height: 50px;border-radius: 10px;">
+        <h1 style="font-family: Algerian;">Customer Management System</h1>
     </header>
 </div>
 <div class="dashboard-container">
     <div class="row">
         <div class="col">
-            <marquee behavior="" direction=""> <h1>Welcome Back</h1> </marquee>
+            <marquee behavior="" direction=""><h1>Welcome Back</h1></marquee>
             <p style="text-align: center">Manage your customers and orders efficiently.</p>
-            <img src="{% static 'assets/welcome.jpg'%}" alt="Welcome" class="img-fluid" style="max-height: 300px;">
+            <div class="slideshow-container">
+                <img src="{% static 'assets/welcome.jpg'%}" alt="Welcome" class="slides fade"
+                     style="height:300px; width: 500px">
+                <img src="{% static 'assets/boss.jpeg' %}" alt="Boss" class="slides fade"
+                     style="height:300px; width: 500px">
+                <img src="{% static 'assets/business.jpeg' %}" alt="Business" class="slides fade"
+                     style="height:300px; width: 500px">
+                <!-- Navigation buttons -->
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            </div>
         </div>
         <div class="col">
             <div class="container h-100">
@@ -167,5 +236,31 @@
         <p>designed by:<a href="mailto:brianonyango879@gmail.com">Brian Odhiambo</a></p>
     </footer>
 </div>
+<script>
+     // JavaScript for Slideshow with Buttons
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Function to show slides
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slides");
+            if (n > slides.length) { slideIndex = 1; } // Wrap around to the first slide
+            if (n < 1) { slideIndex = slides.length; } // Wrap around to the last slide
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none"; // Hide all slides
+            }
+            slides[slideIndex - 1].style.display = "block"; // Show the current slide
+        }
+
+        // Function to change slides
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Auto-slide (optional)
+        setInterval(() => {
+            changeSlide(1); // Move to the next slide every 3 seconds
+        }, 3000);
+</script>
 </body>
 </html>
