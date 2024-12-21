@@ -9,7 +9,7 @@ from django.db.models import Q  # Import Q for complex queries
 @login_required(login_url='login')
 def customer_list(request):
     query = request.GET.get('q')
-    customers = Customer.objects.all()
+    customers = Customer.objects.all().order_by("created_at")
 
     if query:
         # Filter customers based on the search query
@@ -100,7 +100,7 @@ def dashboard(request):
     orders_completed = Order.objects.filter(order_status="Completed").count()
     orders_pending = Order.objects.filter(order_status="Pending").count()
     orders_processing = Order.objects.filter(order_status="Processing").count()
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by("order_date")
 
     # Set up pagination (5 orders per page)
     paginator = Paginator(orders, 5)
