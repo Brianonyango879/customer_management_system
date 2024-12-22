@@ -131,9 +131,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Directories to search for static files (your app's `static/` folder)
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [BASE_DIR / "static"]
