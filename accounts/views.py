@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .decorators import unauthenticated_user
 from django.http import HttpResponse
 from django.template.context_processors import request
 
 from .forms import CustomUserCreationForm
 
 # Create your views here.
+@unauthenticated_user
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -18,7 +20,7 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request,'accounts/register.html',{'form':form})
-
+@unauthenticated_user
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -28,8 +30,8 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect("home")
-    else:
-        messages.error(request,"Invalid Username or Password")
+        else:
+            messages.error(request,"Invalid Username or Password")
     return render(request, 'accounts/login.html')
 #if a user is not logged in, our login.required decorator will redirect back to the login page
 #else we allow the user to see the homepage
