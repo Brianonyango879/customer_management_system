@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ty8e4n1tix0-9=ny4ed%lw(!6b80v11)_6o=d=%)%w&f-3@mjm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['https://customer-management-fkh2.onrender.com/']
+ALLOWED_HOSTS = ['https://customer-management-fkh2.onrender.com']
 
 
 # Application definition
