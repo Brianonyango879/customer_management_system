@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -121,18 +122,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 import os
 from pathlib import Path
+from django.contrib import staticfiles
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # URL for serving static files
-STATIC_URL = 'https://customer-management-ggnm.onrender.com/static/'
+STATIC_URL = '/static/'
 
 # Directory where static files will be collected (for production)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Directories to search for static files (your app's `static/` folder)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 
