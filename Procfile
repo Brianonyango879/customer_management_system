@@ -1,1 +1,1 @@
-web: gunicorn customer_management.wsgi.application
+web: gunicorn customer_management.wsgi:application
