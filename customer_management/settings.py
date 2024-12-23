@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ty8e4n1tix0-9=ny4ed%lw(!6b80v11)_6o=d=%)%w&f-3@mjm
 DEBUG = True
 # DEBUG = False
 
-ALLOWED_HOSTS = ['customer-management-rcid.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'customer_management.urls'
@@ -123,8 +124,6 @@ USE_TZ = True
 import os
 from pathlib import Path
 
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # URL for serving static files
@@ -138,6 +137,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [BASE_DIR / "static"]
