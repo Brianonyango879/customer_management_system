@@ -122,7 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 import os
 from pathlib import Path
-from django.contrib import staticfiles
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
