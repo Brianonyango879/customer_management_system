@@ -125,7 +125,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # URL for serving static files
-STATIC_URL = '/static/'
+STATIC_URL = 'https://customer-management-ggnm.onrender.com/static/'
 
 # Directory where static files will be collected (for production)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -134,6 +134,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
 
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [BASE_DIR / "static"]
