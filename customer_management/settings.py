@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ty8e4n1tix0-9=ny4ed%lw(!6b80v11)_6o=d=%)%w&f-3@mjm
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['customer-management-ggnm.onrender.com']
+ALLOWED_HOSTS = ['https://customer-management-fkh2.onrender.com/']
 
 
 # Application definition
